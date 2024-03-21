@@ -33,8 +33,6 @@ class DashboardViewModel extends BaseViewModel {
 
       if (response.statusCode == 200) {
         print(json.encode(response.data));
-        _hospitals = hospitalResponseFromJson(response.data);
-        print(_hospitals);
       } else {
         print(response.statusMessage);
       }
