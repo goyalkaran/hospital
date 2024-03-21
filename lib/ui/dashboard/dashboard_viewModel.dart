@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:health/core/base_view_model.dart';
 import 'package:health/data/remote/hospital_response.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class DashboardViewModel extends BaseViewModel {
   int _tabIndex = 0;
@@ -32,7 +31,7 @@ class DashboardViewModel extends BaseViewModel {
       );
 
       if (response.statusCode == 200) {
-        print(json.encode(response.data));
+        _hospitals = hospitalResponseFromJson(response.data);
       } else {
         print(response.statusMessage);
       }
@@ -41,7 +40,6 @@ class DashboardViewModel extends BaseViewModel {
     }
     notifyListeners();
   }
-
 
   String getAddressFromHospitalData(HospitalResponse hospitalData) {
     String streetAddress = hospitalData.streetAddress ?? " ";
